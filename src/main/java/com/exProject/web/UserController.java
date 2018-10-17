@@ -1,6 +1,9 @@
 package com.exProject.web;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exProject.domain.User;
@@ -17,18 +21,65 @@ import com.exProject.utilities.TokenGenerator;
 
 @RestController
 @RequestMapping("/users")
-public class UsersController {
+public class UserController {
 	
 	@Autowired
 	UserRepository userRepository;
 
 	@RequestMapping(value="", method=RequestMethod.GET, produces={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public Iterable<User> getUsers() {
-		return userRepository.findAll();
+	public Iterable<User> getUsers(@RequestParam(value="email", required=false) String email, @RequestParam(value="firstName", required=false) String firstName, @RequestParam(value="lastName", required=false) String lastName) {
+		List<User> userList = new ArrayList<>();
+		if (email == null && firstName == null && lastName == null) {
+			return userRepository.findAll();	
+		} else {
+			List<User> tempList = null;
+			Iterator<User> iterator = null;
+			if (email != null) {
+				tempList = userRepository.findByEmail(email);
+				iterator = tempList.iterator();
+				while (iterator.hasNext()) {
+					User user = iterator.next();
+					if (!userList.contains(user)) {
+						userList.add(user);
+					}
+				}
+			}
+			if (firstName != null) {
+				tempList = userRepository.findByFirstName(firstName);
+				iterator = tempList.iterator(); 
+				while (iterator.hasNext()) {
+					User user = iterator.next();
+					if (!userList.contains(user)) {
+						userList.add(user);
+					}
+				}
+			}
+			if (lastName != null) {
+				tempList = userRepository.findByLastName(lastName);
+				iterator = tempList.iterator(); 
+				while (iterator.hasNext()) {
+					User user = iterator.next();
+					if (!userList.contains(user)) {
+						userList.add(user);
+					}
+				}
+			}
+		}
+		return userList;
+	}
+	
+	@RequestMapping(value="/{userId}", method=RequestMethod.GET)
+	public Optional<User> getUser(@PathVariable Long userId) {
+		return userRepository.findById(userId);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public User createUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
+	
+	@RequestMapping(value="", method=RequestMethod.PATCH)
+	public User updateUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
 	
@@ -37,25 +88,9 @@ public class UsersController {
 		userRepository.deleteById(userId);
 	}
 	
-	@RequestMapping(value="/{userId}", method=RequestMethod.PATCH)
-	public void updateUser(@PathVariable("userId") Long userId, @RequestBody User user) {
-		user.setUserId(userId);
-		userRepository.save(user);
-	}
-	
-	@RequestMapping(value="/checkAvailability/{email}")
-	public boolean findAvailability(@PathVariable("email") String email) {
+	@RequestMapping(value="/availability/{email}")
+	public boolean getAvailability(@PathVariable("email") String email) {
 		return userRepository.findByEmail(email).size() == 1;
-	}
-	
-	@RequestMapping(value="/findByEmail/{email:.+}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public List<User> findByEmail(@PathVariable("email") String email) {
-		return userRepository.findByEmail(email);
-	}
-	
-	@RequestMapping(value="/findByFirstName/{firstName}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public List<User> findByFirstName(@PathVariable("firstName") String firstName) {
-		return userRepository.findByFirstName(firstName);
 	}
 	
 	@RequestMapping(value="/updateEmail/{oldEmail:.+}", method=RequestMethod.PUT)
@@ -111,15 +146,6 @@ public class UsersController {
 			return true;
 		}
 		return false;
-	}
-	
-    /*
-    This function takes a Users object and returns a boolean value
-    if the client returns the correct token and accessed time is within 15 minutes after login
-    */
-	private boolean authenticate(String email, String password, String token) {
-		String encodedPassword = PasswordUtility.generateSecurePassword(password);
-		return userRepository.findToAuthenticate(email, encodedPassword, token).size() == 1;
 	}
 	
 }

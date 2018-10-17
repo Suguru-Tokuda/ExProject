@@ -64,8 +64,5 @@ public class TaskAssignment {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	
-	
-	
 
 }
