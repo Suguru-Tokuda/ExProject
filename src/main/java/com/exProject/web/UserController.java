@@ -27,7 +27,7 @@ public class UserController {
 	UserRepository userRepository;
 
 	@RequestMapping(value="", method=RequestMethod.GET, produces={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public Iterable<User> getUsers(@RequestParam(value="email", required=false) String email, @RequestParam(value="firstName", required=false) String firstName, @RequestParam(value="lastName", required=false) String lastName) {
+	public Iterable<User> getUsers(@RequestParam(value="email", required=false) String email, @RequestParam(value="firstName", required=false) String firstName, @RequestParam(value="lastName", required=false) String lastName) {	
 		List<User> userList = new ArrayList<>();
 		if (email == null && firstName == null && lastName == null) {
 			return userRepository.findAll();	
@@ -35,14 +35,9 @@ public class UserController {
 			List<User> tempList = null;
 			Iterator<User> iterator = null;
 			if (email != null) {
-				tempList = userRepository.findByEmail(email);
-				iterator = tempList.iterator();
-				while (iterator.hasNext()) {
-					User user = iterator.next();
-					if (!userList.contains(user)) {
-						userList.add(user);
-					}
-				}
+				User user = userRepository.findByEmail(email);
+				if (user != null)
+					userList.add(user);
 			}
 			if (firstName != null) {
 				tempList = userRepository.findByFirstName(firstName);
@@ -90,7 +85,7 @@ public class UserController {
 	
 	@RequestMapping(value="/availability/{email}")
 	public boolean getAvailability(@PathVariable("email") String email) {
-		return userRepository.findByEmail(email).size() == 1;
+		return userRepository.findByEmail(email) != null;
 	}
 	
 	@RequestMapping(value="/updateEmail/{oldEmail:.+}", method=RequestMethod.PUT)
@@ -98,7 +93,7 @@ public class UserController {
 		if (user.getEmail() == null)
 			return;
 		// Check if the old email exists.
-		if (userRepository.findByEmail(oldEmail).size() == 1) {
+		if (userRepository.findByEmail(oldEmail) != null) {
 			userRepository.updateEmail(user.getEmail(), oldEmail);
 		}
 	}
@@ -108,7 +103,7 @@ public class UserController {
 		if (user.getEmail() == null)
 			return;
 		// If there is a record for the email, it confirms for the email
-		if (userRepository.findByEmail(user.getEmail()).size() == 1)
+		if (userRepository.findByEmail(user.getEmail()) != null)
 			userRepository.confirm(user.getUserId());
 	}
 	
@@ -117,35 +112,40 @@ public class UserController {
 		if (user.getEmail() == null)
 			return;
 		// If there is a record for the email, it archives for the email
-		if (userRepository.findByEmail(user.getEmail()).size() == 1)
+		if (userRepository.findByEmail(user.getEmail()) != null)
 			userRepository.archive(user.getUserId());
 	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@RequestBody User user) {
-		List<User> userList = userRepository.findByEmail(user.getEmail());
-		if (userList.size() > 0) {
-			User userInRecord = userList.get(0);
-			// Check if the provided password matches 
-			if (PasswordUtility.verifyUserPassword(user.getPassword(), userInRecord.getPassword())) {
-				String token = new TokenGenerator().getToken();
-				java.util.Date date = new java.util.Date();
-				Long userId = userList.get(0).getUserId();
-				userRepository.setLoginInfo(new java.sql.Date(date.getTime()), token, userId);
-				return token;				
-			}
-		}		
-		return null;
+	@RequestMapping(value="/findByEmail/{email:.+}", method=RequestMethod.GET)
+	public User getByEmail(@PathVariable("email") String email) {
+		return userRepository.findByEmail(email);
 	}
 	
-	@RequestMapping(value="/loout", method=RequestMethod.POST)
-	public boolean logout(@RequestBody User user) {
-		List<User> userList = userRepository.findByLoginInfo(PasswordUtility.generateSecurePassword(user.getPassword()), user.getUserId(), user.getToken());
-		if (userList.size() > 0) {
-			userRepository.logout(user.getUserId());
-			return true;
-		}
-		return false;
-	}
+//	@RequestMapping(value="/login", method=RequestMethod.POST)
+//	public String login(@RequestBody User user) {
+//		List<User> userList = userRepository.findByEmail(user.getEmail());
+//		if (userList.size() > 0) {
+//			User userInRecord = userList.get(0);
+//			// Check if the provided password matches 
+//			if (PasswordUtility.verifyUserPassword(user.getPassword(), userInRecord.getPassword())) {
+//				String token = new TokenGenerator().getToken();
+//				java.util.Date date = new java.util.Date();
+//				Long userId = userList.get(0).getUserId();
+//				userRepository.setLoginInfo(new java.sql.Date(date.getTime()), token, userId);
+//				return token;				
+//			}
+//		}		
+//		return null;
+//	}
+	
+//	@RequestMapping(value="/loout", method=RequestMethod.POST)
+//	public boolean logout(@RequestBody User user) {
+//		List<User> userList = userRepository.findByLoginInfo(PasswordUtility.generateSecurePassword(user.getPassword()), user.getUserId(), user.getToken());
+//		if (userList.size() > 0) {
+//			userRepository.logout(user.getUserId());
+//			return true;
+//		}
+//		return false;
+//	}
 	
 }

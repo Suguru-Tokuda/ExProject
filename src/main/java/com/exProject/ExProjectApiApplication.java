@@ -1,4 +1,4 @@
-package com.exProject.ExProjectAPI;
+package com.exProject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.slf4j.Logger;
@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.exProject.domain.User;
 import com.exProject.domain.UserRepository;
@@ -21,12 +22,20 @@ import com.exProject.domain.UserRepository;
 public class ExProjectApiApplication {
 	
 	@Autowired
-	private UserRepository repository;	
+	private UserRepository userRepository;
 	
-//	private static final Logger logger = LoggerFactory.getLogger(ExProjectApiApplication.class);
-
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	
 	public static void main(String[] args) {		
-		SpringApplication.run(ExProjectApiApplication.class, args);		
+		SpringApplication.run(ExProjectApiApplication.class, args);
+	}
+	
+	@Bean
+	CommandLineRunner runner() {
+		return args -> {
+			userRepository.save(new User("stokuda", "Suguru", "Tokuda", "suguru.tokuda@gmail.com", encoder.encode("Sfst-0812"), "USER"));
+			userRepository.save(new User("stokuda2", "Suguru", "Tokuda", "suguru.tokuda2@gmail.com", encoder.encode("Sfst-0812"), "USER"));
+		};
 	}
 	
 }
