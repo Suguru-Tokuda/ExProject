@@ -26,15 +26,12 @@ public class AuthenticationService {
 				.setSubject(userName)
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
 				.signWith(SignatureAlgorithm.HS512, SIGNINGKEY).compact();
-		res.addHeader("Authorization", PREFIX + "" + JwtToken);
+		res.addHeader("Authorization", PREFIX + " " + JwtToken);
 		res.addHeader("Access-Control-Expose-Headers", "Authorization");
 	}
 
 	// Get token from Authorization header
 	static public Authentication getAuthentication(HttpServletRequest request) {
-		System.out.println("getAuthentication getAuthentication getAuthentication getAuthentication getAuthentication");
-		System.out.println("getAuthentication getAuthentication getAuthentication getAuthentication getAuthentication");
-		System.out.println("getAuthentication getAuthentication getAuthentication getAuthentication getAuthentication");
 		String token = request.getHeader("Authorization");
 		if (token != null) {
 			String user = Jwts.parser()
