@@ -121,31 +121,4 @@ public class UserController {
 		return userRepository.findByEmail(email);
 	}
 	
-//	@RequestMapping(value="/login", method=RequestMethod.POST)
-//	public String login(@RequestBody User user) {
-//		List<User> userList = userRepository.findByEmail(user.getEmail());
-//		if (userList.size() > 0) {
-//			User userInRecord = userList.get(0);
-//			// Check if the provided password matches 
-//			if (PasswordUtility.verifyUserPassword(user.getPassword(), userInRecord.getPassword())) {
-//				String token = new TokenGenerator().getToken();
-//				java.util.Date date = new java.util.Date();
-//				Long userId = userList.get(0).getUserId();
-//				userRepository.setLoginInfo(new java.sql.Date(date.getTime()), token, userId);
-//				return token;				
-//			}
-//		}		
-//		return null;
-//	}
-	
-//	@RequestMapping(value="/loout", method=RequestMethod.POST)
-//	public boolean logout(@RequestBody User user) {
-//		List<User> userList = userRepository.findByLoginInfo(PasswordUtility.generateSecurePassword(user.getPassword()), user.getUserId(), user.getToken());
-//		if (userList.size() > 0) {
-//			userRepository.logout(user.getUserId());
-//			return true;
-//		}
-//		return false;
-//	}
-	
 }

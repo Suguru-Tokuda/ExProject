@@ -37,14 +37,15 @@ public class ExProjectApiSecurityConfig extends WebSecurityConfigurerAdapter {
 			http
 				.cors()
 					.and()
+				.csrf().disable()
 				.authorizeRequests()
 					.antMatchers(HttpMethod.POST, "/login").permitAll()
-					.anyRequest().authenticated()
+						.anyRequest().authenticated()
 					.and()
-				// Filter for the api/login requests
-				.addFilterBefore(new LoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-				// Filter for other requests to check JWT in header
-				.addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+					// Filter for the api/login requests
+					.addFilterBefore(new LoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+					// Filter for other requests to check JWT in header
+					.addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		}
 		
 		@Bean
@@ -59,7 +60,5 @@ public class ExProjectApiSecurityConfig extends WebSecurityConfigurerAdapter {
 			source.registerCorsConfiguration("/**", config);
 			return source;
 		}
-
-		
 	
 }
