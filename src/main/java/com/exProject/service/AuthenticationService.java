@@ -16,7 +16,7 @@ import static java.util.Collections.emptyList;
 
 @Component
 public class AuthenticationService {
-	static final long EXPIRATIONTIME = 8640000;
+	static final long EXPIRATIONTIME = 864_000_00;
 	static final String SIGNINGKEY = "SecretKey";
 	static final String PREFIX = "Bearer";
 
@@ -26,15 +26,12 @@ public class AuthenticationService {
 				.setSubject(userName)
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
 				.signWith(SignatureAlgorithm.HS512, SIGNINGKEY).compact();
-		res.addHeader("Authorization", PREFIX + "" + JwtToken);
+		res.addHeader("Authorization ", PREFIX + " " + JwtToken);
 		res.addHeader("Access-Control-Expose-Headers", "Authorization");
 	}
 
 	// Get token from Authorization header
 	static public Authentication getAuthentication(HttpServletRequest request) {
-		System.out.println("getAuthentication getAuthentication getAuthentication getAuthentication getAuthentication");
-		System.out.println("getAuthentication getAuthentication getAuthentication getAuthentication getAuthentication");
-		System.out.println("getAuthentication getAuthentication getAuthentication getAuthentication getAuthentication");
 		String token = request.getHeader("Authorization");
 		if (token != null) {
 			String user = Jwts.parser()

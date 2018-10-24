@@ -14,8 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exProject.domain.AccountCredentials;
 import com.exProject.service.AuthenticationService;
@@ -24,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 // Handles POST requests to the /login end point.
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	
-	public LoginFilter(String url, AuthenticationManager authManager) {
+	public LoginFilter(String url, AuthenticationManager authManager) {		
 		super(new AntPathRequestMatcher(url));
 		setAuthenticationManager(authManager);
 	}
