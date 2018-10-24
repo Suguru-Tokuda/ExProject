@@ -16,14 +16,15 @@ import static java.util.Collections.emptyList;
 
 @Component
 public class AuthenticationService {
+	
 	static final long EXPIRATIONTIME = 864_000_00;
 	static final String SIGNINGKEY = "SecretKey";
 	static final String PREFIX = "Bearer";
 
 	// Add token to Authorization header
-	static public void addToken(HttpServletResponse res, String userName) {
+	static public void addToken(HttpServletResponse res, String email) {
 		String JwtToken = Jwts.builder()
-				.setSubject(userName)
+				.setSubject(email)
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
 				.signWith(SignatureAlgorithm.HS512, SIGNINGKEY).compact();
 		res.addHeader("Authorization", PREFIX + " " + JwtToken);

@@ -39,7 +39,8 @@ public class ExProjectApiSecurityConfig extends WebSecurityConfigurerAdapter {
 					.and()
 				.csrf().disable()
 				.authorizeRequests()
-					.antMatchers(HttpMethod.POST, "/login").permitAll()
+					.antMatchers(HttpMethod.POST, "/login", "/users/confirm").permitAll()
+					.antMatchers(HttpMethod.GET, "/users/availability/{email}").permitAll()
 						.anyRequest().authenticated()
 					.and()
 					// Filter for the api/login requests

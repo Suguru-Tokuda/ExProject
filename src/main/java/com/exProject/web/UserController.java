@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.exProject.domain.User;
 import com.exProject.domain.UserRepository;
-import com.exProject.utilities.PasswordUtility;
-import com.exProject.utilities.TokenGenerator;
 
 @RestController
 @RequestMapping("/users")
@@ -83,9 +81,9 @@ public class UserController {
 		userRepository.deleteById(userId);
 	}
 	
-	@RequestMapping(value="/availability/{email}")
+	@RequestMapping(value="/availability/{email:.+}")
 	public boolean getAvailability(@PathVariable("email") String email) {
-		return userRepository.findByEmail(email) != null;
+		return userRepository.findByEmail(email) == null;
 	}
 	
 	@RequestMapping(value="/updateEmail/{oldEmail:.+}", method=RequestMethod.PUT)
