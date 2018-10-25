@@ -12,47 +12,47 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="UserTypes")
 @XmlRootElement
 public class UserType {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="userTypeId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
 	private Long userTypeId;
-	@Column(name="projectId", columnDefinition="MEDIUMINT NOT NULL")
-	private Long projectId;
-	@Column(name="userType", columnDefinition="VARCHAR(30)")
-	private String userType;
+	@Column(name="userId", columnDefinition="MEDIUMINT NOT NULL")
+	private Long userId;
+	@Column(name="userTypeOptionId", columnDefinition="MEDIUMINT NOT NULL")
+	private Long userTypeOptionId;
 	
-	public UserType() {		
+	public UserType() {
 	}
 	
-	public UserType(Long userTypeId, Long projectId, String userType) {
+	public UserType(Long userId, Long userTypeId) {
+		this.userId = userId;
 		this.userTypeId = userTypeId;
-		this.projectId = projectId;
-		this.userType = userType;
-	}
-	
-	public UserType(Long projectId, String userType) {
-		this.projectId = projectId;
-		this.userType = userType;
 	}	
 	
-	public Long getUserTypeId() {
-		return userTypeId;
-	}
-	public void setUserTypeId(Long userTypeId) {
+	public UserType(Long userTypeAssignmentId, Long userId, Long userTypeId) {
+		this.userTypeId = userTypeId;
+		this.userId = userId;
 		this.userTypeId = userTypeId;
 	}
-	public Long getProjectId() {
-		return projectId;
+
+	public Long getuserTypeAssignmentId() {
+		return userTypeId;
 	}
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
+	public void setuserTypeAssignmentId(Long userTypeId) {
+		this.userTypeId = userTypeId;
 	}
-	public String getUserType() {
-		return userType;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setUserType(String userType) {
-		this.userType = userType;
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public Long getUserTypeOptionId() {
+		return userTypeOptionId;
+	}
+	public void setUserTypeOptionId(Long userTypeOptionId) {
+		this.userTypeOptionId = userTypeOptionId;
 	}
 
 }
