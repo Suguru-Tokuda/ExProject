@@ -22,7 +22,7 @@ import com.executor.service.UserDetailServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-public class ExProjectApiSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ExecutorApiSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 		@Autowired
 		private UserDetailServiceImpl userDetailsService;

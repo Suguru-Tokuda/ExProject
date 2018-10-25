@@ -16,10 +16,10 @@ import com.executor.domain.User;
 import com.executor.domain.UserRepository;
 
 @SpringBootApplication
-@ComponentScan(basePackages= {"com.exProject"})
-@EntityScan(basePackages= {"com.exProject.domain"})
-@EnableJpaRepositories(basePackages= {"com.exProject"})
-public class ExProjectApiApplication {
+@ComponentScan(basePackages={"com.executor"})
+@EntityScan(basePackages={"com.executor.domain"})
+@EnableJpaRepositories(basePackages={"com.executor"})
+public class ExecutorApiApplication {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -27,7 +27,7 @@ public class ExProjectApiApplication {
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	public static void main(String[] args) {		
-		SpringApplication.run(ExProjectApiApplication.class, args);
+		SpringApplication.run(ExecutorApiApplication.class, args);
 	}
 	
 	@Bean

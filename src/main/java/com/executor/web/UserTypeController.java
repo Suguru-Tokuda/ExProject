@@ -20,8 +20,8 @@ public class UserTypeController {
 	UserTypeRepository userTypeRepository;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
-	public UserType getUserType(@RequestParam(value="userId", required=true) Long userId, @RequestParam(value="projectId", required=true) Long projectId){
-		return userTypeRepository.findByParams(userId, projectId).get(0);
+	public Iterable<UserType> getUserType(@RequestParam(value="userId", required=true) Long userId, @RequestParam(value="projectId", required=true) Long projectId){
+		return userTypeRepository.findByParams(userId, projectId);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)

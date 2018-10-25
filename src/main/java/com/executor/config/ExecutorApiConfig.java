@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class ExProjectApiConfig implements WebMvcConfigurer {
+public class ExecutorApiConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
