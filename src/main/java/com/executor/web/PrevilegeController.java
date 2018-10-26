@@ -19,8 +19,8 @@ public class PrevilegeController {
 	PrevilegeRepository previlegeRepository;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
-	public Previlege getPrevilege(@RequestParam(value="userTypeOptionId", required=true) Long userTypeOptionId) {
-		return previlegeRepository.findByUserTypeOptionId(userTypeOptionId).get(0);
+	public Iterable<Previlege> getPrevileges(@RequestParam(value="userTypeOptionId", required=true) Long userTypeOptionId) {
+		return previlegeRepository.findAll();
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
