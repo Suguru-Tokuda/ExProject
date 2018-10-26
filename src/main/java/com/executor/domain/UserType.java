@@ -39,18 +39,23 @@ public class UserType {
 	public Long getuserTypeAssignmentId() {
 		return userTypeId;
 	}
+	
 	public void setuserTypeAssignmentId(Long userTypeId) {
 		this.userTypeId = userTypeId;
 	}
+	
 	public Long getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	
 	public Long getUserTypeOptionId() {
 		return userTypeOptionId;
 	}
+	
 	public void setUserTypeOptionId(Long userTypeOptionId) {
 		this.userTypeOptionId = userTypeOptionId;
 	}

@@ -43,24 +43,31 @@ public class TaskAssignment {
 	public Long getTaskAssignmentId() {
 		return taskAssignmentId;
 	}
+	
 	public void setTaskAssignmentId(Long taskAssignmentId) {
 		this.taskAssignmentId = taskAssignmentId;
 	}
+	
 	public Long getTaskId() {
 		return taskId;
 	}
+	
 	public void setTaskId(Long taskId) {
 		this.taskId = taskId;
 	}
+	
 	public Long getProjectId() {
 		return projectId;
 	}
+	
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
+	
 	public Long getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}

@@ -17,42 +17,35 @@ public class Previlege {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="previlegeId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
 	private Long previlegeId;
-	@Column(name="previlegeStr", columnDefinition="VARCHAR(30)")
-	private String previlegeStr; // This string is delimited by ;
-	@Column(name="userTypeOptionId", columnDefinition="MEDIUMINT NOT NULL")
-	private Long userTypeOptionId;
+	@Column(name="previlegeName", columnDefinition="VARCHAR(30)")
+	private String previlegeName;
 	
 	public Previlege() {
 	}
 	
-	public Previlege(Long previlegeId, String previlegeStr, Long userTypeOptionId) {
+	public Previlege(Long previlegeId, String previlegeName, Long userTypeOptionId) {
 		this.previlegeId = previlegeId;
-		this.previlegeStr = previlegeStr;
-		this.userTypeOptionId = userTypeOptionId;
+		this.previlegeName = previlegeName;
 	}
 	
-	public Previlege(String previlegeStr, Long userTypeOptionId) {
-		this.previlegeStr = previlegeStr;
-		this.userTypeOptionId = userTypeOptionId;
+	public Previlege(String previlegeName, Long userTypeOptionId) {
+		this.previlegeName = previlegeName;
 	}
 	
 	public Long getPrevilegeId() {
 		return previlegeId;
 	}
+	
 	public void setPrevilegeId(Long previlegeId) {
 		this.previlegeId = previlegeId;
 	}
-	public String getprevilegeStr() {
-		return previlegeStr;
+	
+	public String getprevilegeName() {
+		return previlegeName;
 	}
-	public void setPrevilege(String previlegeStr) {
-		this.previlegeStr = previlegeStr;
+	
+	public void setPrevilegeName(String previlegeName) {
+		this.previlegeName = previlegeName;
 	}
-	public Long getUserTypeOptionId() {
-		return userTypeOptionId;
-	}
-	public void setUserTypeOptionId(Long userTypeOptionId) {
-		this.userTypeOptionId = userTypeOptionId;
-	}	
 
 }

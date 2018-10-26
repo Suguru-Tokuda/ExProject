@@ -119,66 +119,87 @@ public class User {
 	public Long getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	
 	public String getuserName() {
 		return username;
 	}
+	
 	public void setUserName(String userName) {
 		this.username = userName;
 	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
+	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
 	public String getLastName() {
 		return lastName;
 	}
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	public String getSkills() {
 		return skills;
 	}
+	
 	public void setSkills(String skills) {
 		this.skills = skills;
 	}
+	
 	public String getPicture() {
 		return picture;
 	}
+	
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
+	
 	public boolean isConfirmed() {
 		return confirmed;
 	}
+	
 	public void setConfirmed(boolean confirmed) {
 		this.confirmed = confirmed;
 	}
+	
 	public boolean isArchived() {
 		return archived;
 	}
+	
 	public void setArchived(boolean archived) {
 		this.archived = archived;
 	}
+	
 	public String getRole() {
 		return role;
 	}
+	
 	public void setRole(String role) {
 		this.role = role;
 	}

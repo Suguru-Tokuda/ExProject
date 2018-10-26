@@ -36,18 +36,23 @@ public class ProjectAssignment {
 	public Long getProjectAssignmentId() {
 		return projectAssignmentId;
 	}
+	
 	public void setProjectAssignmentId(Long projectAssignmentId) {
 		this.projectAssignmentId = projectAssignmentId;
 	}
+	
 	public Long getProjectdId() {
 		return projectId;
 	}
+	
 	public void setProjectdId(Long projectdId) {
 		this.projectId = projectdId;
 	}
+	
 	public Long getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}

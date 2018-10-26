@@ -21,38 +21,56 @@ public class UserTypeOption {
 	private Long projectId;
 	@Column(name="userType", columnDefinition="VARCHAR(30)")
 	private String userType;
+	@Column(name="previlegeStr", columnDefinition="VARCHAR(255)")
+	private String privilegeStr;
 	
 	public UserTypeOption() {		
 	}
 	
-	public UserTypeOption(Long userTypeOptionId, Long projectId, String userType) {
+	public UserTypeOption(Long userTypeOptionId, Long projectId, String userType, String privilegeStr) {
 		this.userTypeOptionId = userTypeOptionId;
 		this.projectId = projectId;
 		this.userType = userType;
+		this.privilegeStr = privilegeStr;
 	}
 	
-	public UserTypeOption(Long projectId, String userType) {
+	public UserTypeOption(Long projectId, String userType, String privilegeStr) {
 		this.projectId = projectId;
 		this.userType = userType;
+		this.privilegeStr = privilegeStr;
 	}	
 	
-	public Long getuserTypeOptionId() {
+	public Long getUserTypeOptionId() {
 		return userTypeOptionId;
 	}
-	public void setUserTypeId(Long userTypeOptionId) {
+	
+	public void setUserTypeOptionId(Long userTypeOptionId) {
 		this.userTypeOptionId = userTypeOptionId;
 	}
+	
 	public Long getProjectId() {
 		return projectId;
 	}
+	
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
+	
 	public String getUserType() {
 		return userType;
 	}
+	
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
+	
+	public String getPrivilegeStr() {
+		return privilegeStr;
+	}
+	
+	public void setPrivilegeStr(String privilegeStr) {
+		this.privilegeStr = privilegeStr;
+	}
+	
 
 }

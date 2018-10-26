@@ -49,34 +49,41 @@ public class ReviewAssignment {
 	public Long getReviewAssignmentId() {
 		return reviewAssignmentId;
 	}
+	
 	public void setReviewAssignmentId(Long reviewAssignmentId) {
 		this.reviewAssignmentId = reviewAssignmentId;
 	}
+	
 	public Long getReviewId() {
 		return reviewId;
 	}
+	
 	public void setReviewId(Long reviewId) {
 		this.reviewId = reviewId;
 	}
+	
 	public Long getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	
 	public Long getReviewerId() {
 		return reviewerId;
 	}
+	
 	public void setReviewerId(Long reviewerId) {
 		this.reviewerId = reviewerId;
 	}
+	
 	public Long getProjectId() {
 		return projectId;
 	}
+	
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
-	
-	
 	
 }

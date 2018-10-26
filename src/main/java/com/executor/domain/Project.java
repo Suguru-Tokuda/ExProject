@@ -61,36 +61,47 @@ public class Project {
 	public Long getProjectId() {
 		return projectId;
 	}
+	
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
+	
 	public String getProjectName() {
 		return projectName;
 	}
+	
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
+	
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+	
 	public Date getEndDate() {
 		return endDate;
 	}
+	
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
 	public boolean isCompleted() {
 		return completed;
 	}
+	
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
 	}
+	
 	public String getPicture() {
 		return picture;
 	}
+	
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
