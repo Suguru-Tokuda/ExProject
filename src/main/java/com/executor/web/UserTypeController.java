@@ -29,18 +29,13 @@ public class UserTypeController {
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public UserType getUserType(@RequestParam(value="userId", required=true) Long userId, @RequestParam(value="projectId", required=true) Long projectId){
 		List<UserTypeOption> userTypeOptions = userTypeOptionRepository.findByProjectId(projectId);
-		Iterator<UserType> userTypeIterator = userTypeRepository.findAll().iterator();
-		Iterator<UserTypeOption> userTypeOptionIterator = null;
+		Iterator<UserTypeOption> iterator = userTypeOptions.iterator();
 		
-		while (userTypeIterator.hasNext()) {
-			UserType tempUserType = userTypeIterator.next();
-			userTypeOptionIterator = userTypeOptions.iterator();
-			while (userTypeOptionIterator.hasNext()) {
-				UserTypeOption userTypeOption = userTypeOptionIterator.next();
-				if (tempUserType.getUserId() == userId && tempUserType.getUserTypeOptionId() == userTypeOption.getuserTypeOptionId()) {
-					return tempUserType;
-				}
-			}
+		while (iterator.hasNext()) {
+			UserTypeOption temp = iterator.next();
+			UserType userType = userTypeRepository.findByParams(userId, temp.getuserTypeOptionId()).get(0);
+			if (userType != null)
+				return userType;
 		}
 		return null;
 	}
@@ -57,13 +52,14 @@ public class UserTypeController {
 	
 	@RequestMapping(value="/{userTypeId}", method=RequestMethod.DELETE)
 	public void deleteUserType(@PathVariable("userTypeId") Long userTypeId) {
+		userTypeOptionRepository.deleteByUserTypeId(userTypeId);
 		userTypeRepository.deleteById(userTypeId);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.DELETE)
-	public void deleteUserType(@RequestParam(value="userId", required=true) Long userId, @RequestParam(value="projectId", required=true) Long projectId) {
-		userTypeRepository.deleteByParams(userId, projectId);
+	public void deleteUserType(@RequestParam(value="userId", required=true) Long userId, @RequestParam(value="userTypeOptionId", required=true) Long userTypeOptionId) {
+		userTypeOptionRepository.deleteById(userTypeOptionId);
+		userTypeRepository.deleteByParams(userId, userTypeOptionId);
 	}
-	
-	
+		
 }
