@@ -39,7 +39,10 @@ public class ExecutorApiSecurityConfig extends WebSecurityConfigurerAdapter {
 					.and()
 				.csrf().disable()
 				.authorizeRequests()
-					.antMatchers(HttpMethod.POST, "/login", "/users/confirm").permitAll()
+					.antMatchers(HttpMethod.POST, 
+							"/login", 
+							"/users/confirm",
+							"/users").permitAll()
 					.antMatchers(HttpMethod.GET, "/users/availability/{email}").permitAll()
 						.anyRequest().authenticated()
 					.and()
