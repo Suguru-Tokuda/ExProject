@@ -45,9 +45,9 @@ public class User {
         this.userId = userId;
     }
     
-    public User(Long userId, String userName, String firstName, String lastName, String email, String password, String skills, String picture, boolean confirmed, boolean archived, String role) {
+    public User(Long userId, String username, String firstName, String lastName, String email, String password, String skills, String picture, boolean confirmed, boolean archived, String role) {
     	this.userId = userId;
-    	this.username = userName;
+    	this.username = username;
     	this.firstName = firstName;
     	this.lastName = lastName;
     	this.email = email;
@@ -59,8 +59,8 @@ public class User {
     	this.role = role;
     }
     
-    public User(String userName, String firstName, String lastName, String email, String skills, String password, String role) {
-    	this.username = userName;
+    public User(String username, String firstName, String lastName, String email, String skills, String password, String role) {
+    	this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -71,36 +71,13 @@ public class User {
         this.archived = false;
     }
     
-    public User(String userName, String firstName, String lastName, String email, String password, String role) {
-    	this.username = userName;
+    public User(String username, String firstName, String lastName, String email, String password, String role) {
+    	this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.confirmed = false;
-        this.archived = false;
-    }
-
-    public User(Long userId, String userName, String firstName, String lastName, String email, String skills, String password, boolean confirmed, boolean archived) {
-        this.userId = userId;
-    	this.username = userName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.skills = skills;
-        this.password = password;
-        this.confirmed = confirmed;
-        this.archived = archived;
-    }
-    
-    public User(Long userId, String userName, String firstName, String lastName, String email, String password) {
-        this.userId = userId;
-        this.username = userName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
         this.confirmed = false;
         this.archived = false;
     }
