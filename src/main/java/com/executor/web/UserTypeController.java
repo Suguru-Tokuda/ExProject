@@ -33,7 +33,7 @@ public class UserTypeController {
 		
 		while (iterator.hasNext()) {
 			UserTypeOption temp = iterator.next();
-			UserType userType = userTypeRepository.findByParams(userId, temp.getuserTypeOptionId()).get(0);
+			UserType userType = userTypeRepository.findByParams(userId, temp.getUserTypeOptionId()).get(0);
 			if (userType != null)
 				return userType;
 		}

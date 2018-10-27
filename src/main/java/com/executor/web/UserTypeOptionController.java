@@ -32,7 +32,6 @@ public class UserTypeOptionController {
 	
 	@RequestMapping(value="/{userTypeOptionId}", method=RequestMethod.DELETE)
 	public void deleteUserTypeOption(@PathVariable("userTypeOptionId") Long userTypeOptionId) {
-		previlegeRepository.deleteByUserTypeOptionId(userTypeOptionId);
 		userTypeOptionRepository.deleteById(userTypeOptionId);
 	}
 
