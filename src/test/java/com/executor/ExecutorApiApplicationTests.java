@@ -1,4 +1,4 @@
-package com.exProject.ExProjectAPI;
+package com.executor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ExProjectApiApplicationTests {
+public class ExecutorApiApplicationTests {
 
 	@Test
 	public void contextLoads() {
