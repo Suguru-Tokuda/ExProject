@@ -8,33 +8,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.executor.domain.Previlege;
-import com.executor.domain.PrevilegeRepository;
+import com.executor.domain.Privilege;
+import com.executor.domain.PrivilegeRepository;
 
 @RestController
 @RequestMapping("/previleges")
-public class PrevilegeController {
+public class PrivilegeController {
 	
 	@Autowired
-	PrevilegeRepository previlegeRepository;
+	PrivilegeRepository previlegeRepository;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
-	public Iterable<Previlege> getPrevileges(@RequestParam(value="userTypeOptionId", required=true) Long userTypeOptionId) {
+	public Iterable<Privilege> getPrivileges(@RequestParam(value="userTypeOptionId", required=true) Long userTypeOptionId) {
 		return previlegeRepository.findAll();
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public Previlege createPrevilege(@RequestBody Previlege previlege) {
+	public Privilege createPrivilege(@RequestBody Privilege previlege) {
 		return previlegeRepository.save(previlege);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.PATCH)
-	public Previlege updatePrevilege(@RequestBody Previlege previlege) {
+	public Privilege updatePrivilege(@RequestBody Privilege previlege) {
 		return previlegeRepository.save(previlege);
 	}
 	
 	@RequestMapping(value="/{previlegeId}", method=RequestMethod.DELETE)
-	public void deletePrevilege(@PathVariable("previlegeId") Long previlegeId) {
+	public void deletePrivilege(@PathVariable("previlegeId") Long previlegeId) {
 		previlegeRepository.deleteById(previlegeId);
 	}
 	

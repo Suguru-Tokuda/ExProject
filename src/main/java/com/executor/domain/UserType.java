@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="UserTypes")
 @XmlRootElement
+/* Bridge entity between Users and UserOptions */
 public class UserType {
 
 	@Id

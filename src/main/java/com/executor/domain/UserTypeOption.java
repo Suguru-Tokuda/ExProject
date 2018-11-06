@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="UserTypeOptions")
 @XmlRootElement
+/* This class holds which privilege users have for a particular project  */
 public class UserTypeOption {
 	
 	@Id
@@ -21,7 +22,7 @@ public class UserTypeOption {
 	private Long projectId;
 	@Column(name="userType", columnDefinition="VARCHAR(30)")
 	private String userType;
-	@Column(name="previlegeStr", columnDefinition="VARCHAR(255)")
+	@Column(name="privilegeStr", columnDefinition="VARCHAR(255)")
 	private String privilegeStr;
 	
 	public UserTypeOption() {		
