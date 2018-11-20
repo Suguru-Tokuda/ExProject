@@ -21,27 +21,27 @@ public class Review {
 	private Long reviewId;
 	@Column(name="title", columnDefinition="VARCHAR(30) NOT NULL")
 	private String title;
-	@Column(name="description", columnDefinition="VARCHAR(500) NOT NULL")
-	private String description;
-	@Column(name="reviewDate", columnDefinition="DATE NOT NULL")
-	private Date reviewDate;
+	@Column(name="reviewDescription", columnDefinition="VARCHAR(500) NOT NULL")
+	private String reviewDescription;
+	@Column(name="postDate", columnDefinition="DATE NOT NULL")
+	private Date postDate;
 	
 	public Review() {
 	}
 	
-	public Review(Long reviewId, String title, String description, Date reviewDate) {
+	public Review(Long reviewId, String title, String reviewDescription, Date postDate) {
 		super();
 		this.reviewId = reviewId;
 		this.title = title;
-		this.description = description;
-		this.reviewDate = reviewDate;
+		this.reviewDescription = reviewDescription;
+		this.postDate = postDate;
 	}
 
-	public Review(String title, String description, Date reviewDate) {
+	public Review(String title, String reviewDescription, Date reviewDate) {
 		super();
 		this.title = title;
-		this.description = description;
-		this.reviewDate = reviewDate;
+		this.reviewDescription = reviewDescription;
+		this.postDate = reviewDate;
 	}
 
 	public Long getReviewId() {
@@ -61,19 +61,19 @@ public class Review {
 	}
 	
 	public String getDescription() {
-		return description;
+		return reviewDescription;
 	}
 	
 	public void setDescription(String description) {
-		this.description = description;
+		this.reviewDescription = description;
 	}
 	
 	public Date getReviewDate() {
-		return reviewDate;
+		return postDate;
 	}
 	
-	public void setReviewDate(Date reviewDate) {
-		this.reviewDate = reviewDate;
+	public void setPostDate(Date reviewDate) {
+		this.postDate = reviewDate;
 	}
 
 }
