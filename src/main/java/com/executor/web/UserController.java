@@ -81,41 +81,34 @@ public class UserController {
 		userRepository.deleteById(userId);
 	}
 	
-	@RequestMapping(value="/availability/{email:.+}")
-	public boolean getAvailability(@PathVariable("email") String email) {
+	@RequestMapping(value="/availability")
+	public boolean getAvailability(@RequestParam(value="email", required=false) String email) {
 		return userRepository.findByEmail(email) == null;
 	}
 	
-	@RequestMapping(value="/updateEmail/{oldEmail:.+}", method=RequestMethod.PUT)
-	public void updateEmail(@PathVariable("oldEmail") String oldEmail, @RequestBody User user) {
-		if (user.getEmail() == null)
-			return;
+	@RequestMapping(value="/updateEmail", method=RequestMethod.PUT)
+	public void updateEmail(@RequestParam(value="oldEmail", required=true) String oldEmail, @RequestParam(value="newEmail", required=true) String newEmail) {
 		// Check if the old email exists.
-		if (userRepository.findByEmail(oldEmail) != null) {
-			userRepository.updateEmail(user.getEmail(), oldEmail);
-		}
+		if (userRepository.findByEmail(oldEmail) != null)
+			userRepository.updateEmail(newEmail, oldEmail);
 	}
 	
 	@RequestMapping(value="/confirm", method=RequestMethod.POST)
-	public void confirmUser(@RequestBody User user) {
-		if (user.getEmail() == null)
-			return;
+	public void confirmUser(@RequestParam(value="userId", required=true) String userId) {
 		// If there is a record for the email, it confirms for the email
-		if (userRepository.findByEmail(user.getEmail()) != null)
-			userRepository.confirm(user.getUserId());
+		if (userRepository.findById(Long.parseLong(userId)) != null)
+			userRepository.confirm(Long.parseLong(userId));
 	}
 	
 	@RequestMapping(value="/archive", method=RequestMethod.POST)
-	public void archiveUser(@RequestBody User user) {
-		if (user.getEmail() == null)
-			return;
+	public void archiveUser(@RequestParam(value="userId", required=true) String userId, @RequestParam(value="email", required=true) String email) {
 		// If there is a record for the email, it archives for the email
-		if (userRepository.findByEmail(user.getEmail()) != null)
-			userRepository.archive(user.getUserId());
+		if (userRepository.findByEmail(email) != null)
+			userRepository.archive(Long.parseLong(userId));
 	}
 	
-	@RequestMapping(value="/findByEmail/{email:.+}", method=RequestMethod.GET)
-	public User getByEmail(@PathVariable("email") String email) {
+	@RequestMapping(value="/findByEmail", method=RequestMethod.POST)
+	public User getByEmail(@RequestParam(value="email", required=true) String email) {
 		return userRepository.findByEmail(email);
 	}
 	
