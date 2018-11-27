@@ -1,7 +1,5 @@
 package com.executor.web;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -33,28 +31,16 @@ public class ProjectController {
 	
 	@RequestMapping(value="")
 	public Iterable<Project> getProjects(@RequestParam(value="userId", required=false) Long userId) {
-		List<Project> retVal = null;
 		if (userId == null) 
-			retVal = StreamSupport.stream(projectRepository.findAll().spliterator(), false).collect(Collectors.toList());
+			return StreamSupport.stream(projectRepository.findAll().spliterator(), false).collect(Collectors.toList());
 		else {
-			retVal = projectRepository.findByUserId(userId);
+			return projectRepository.findByUserId(userId);
 		}
-		/* Iterate projects and set tasks */
-		for (int i = 0; i < retVal.size(); i++) {
-			Project tempProject = retVal.get(i);
-			tempProject.setTasks(taskRepository.findByProjectId(tempProject.getProjectId()));;
-			retVal.set(i, tempProject);
-		}
-		return retVal;
 	}
 	
 	@RequestMapping(value="/{projectId}", method=RequestMethod.GET)
 	public Optional<Project> getProject(@PathVariable("projectId") Long projectId) {
-		Optional<Project> tempVal = projectRepository.findById(projectId);
-		Project project = tempVal.orElse(null);
-		if (project != null)
-			project.setTasks(taskRepository.findByProjectId(projectId));
-		return Optional.of(project);
+		return projectRepository.findById(projectId);
 	}
 	
 	@RequestMapping(value="/{userId}", method=RequestMethod.POST)

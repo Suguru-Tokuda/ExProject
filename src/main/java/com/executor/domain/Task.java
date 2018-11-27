@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Task {
 	private boolean completed;
 	@Column(name="approved", columnDefinition="TINYINT(1) NOT NULL DEFAULT 0")
 	private boolean approved;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="projectId", nullable=false, columnDefinition="BIGINT")
 	private Project project;
 	
