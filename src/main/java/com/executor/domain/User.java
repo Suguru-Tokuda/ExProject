@@ -1,10 +1,14 @@
 package com.executor.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -37,6 +41,8 @@ public class User {
 	private boolean archived;
 	@Column(name="role", nullable=false, columnDefinition="VARCHAR(10) DEFAULT 'User'")
 	private String role;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	private List<Task> tasks;
 	
 	public User() {
     }
@@ -99,6 +105,14 @@ public class User {
 	
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	public String getuserName() {
@@ -179,6 +193,14 @@ public class User {
 	
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 }

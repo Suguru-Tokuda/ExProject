@@ -35,6 +35,9 @@ public class Task {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="projectId", nullable=false, columnDefinition="BIGINT")
 	private Project project;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="userId", nullable=false, columnDefinition="BIGINT")
+	private User user;
 	
 	public Task() {}
 	
@@ -46,17 +49,6 @@ public class Task {
 		this.endDate = endDate;
 		this.completed = completed;
 		this.approved = approved;
-	}
-	
-	public Task(Long taskId, String taskName, Date startDate, Date endDate, boolean completed, boolean approved, Project project) {
-		super();
-		this.taskId = taskId;
-		this.taskName = taskName;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.completed = completed;
-		this.approved = approved;
-		this.project = project;
 	}
 
 	public Long getTaskId() {
@@ -113,6 +105,14 @@ public class Task {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

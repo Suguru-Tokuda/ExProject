@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.executor.domain.Task;
-import com.executor.domain.TaskAssignment;
-import com.executor.domain.TaskAssignmentRepository;
 import com.executor.domain.TaskRepository;
 
 @RestController
@@ -24,8 +22,6 @@ public class TaksController {
 	
 	@Autowired
 	TaskRepository taskRepository;
-	@Autowired
-	TaskAssignmentRepository taskAssignmentRepository;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public Iterable<Task> getTasks(@RequestParam(value="projectId", required=false) Long projectId, @RequestParam(value="userId", required=false) Long userId) {
@@ -67,7 +63,6 @@ public class TaksController {
 	@RequestMapping(value="/{userId}/{projectId}", method=RequestMethod.POST)
 	public Task createTask(@RequestBody Task task, @PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId) {
 		Task retVal = taskRepository.save(task);
-		taskAssignmentRepository.save(new TaskAssignment(retVal.getTaskId(), userId));
 		return retVal;
 	}
 	
@@ -75,6 +70,12 @@ public class TaksController {
 	public Task updateTask(@RequestBody Task task) {
 		return taskRepository.save(task);
 	}
+	
+	@RequestMapping(value="/setUser", method=RequestMethod.POST)
+	public Task setUser(@RequestParam(value="userId", required=true) String userId, @RequestParam(value="taskId", required=true) String taskId) {
+		return taskRepository.setUserId(Long.parseLong(userId), Long.parseLong(taskId));
+	}
+			
 	
 	@RequestMapping(value="/{taskId}", method=RequestMethod.DELETE)
 	public void deleteTask(@PathVariable("taskId") Long taskId) {
