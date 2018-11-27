@@ -37,11 +37,11 @@ public class Review {
 		this.postDate = postDate;
 	}
 
-	public Review(String title, String reviewDescription, Date reviewDate) {
+	public Review(String title, String reviewDescription, Date postDate) {
 		super();
 		this.title = title;
 		this.reviewDescription = reviewDescription;
-		this.postDate = reviewDate;
+		this.postDate = postDate;
 	}
 
 	public Long getReviewId() {
@@ -68,12 +68,12 @@ public class Review {
 		this.reviewDescription = description;
 	}
 	
-	public Date getReviewDate() {
+	public Date getPostDate() {
 		return postDate;
 	}
 	
-	public void setReviewDate(Date reviewDate) {
-		this.postDate = reviewDate;
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
 	}
 
 }
