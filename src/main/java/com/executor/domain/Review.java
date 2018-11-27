@@ -72,7 +72,7 @@ public class Review {
 		return postDate;
 	}
 	
-	public void setPostDate(Date reviewDate) {
+	public void setReviewDate(Date reviewDate) {
 		this.postDate = reviewDate;
 	}
 
