@@ -67,7 +67,7 @@ public class TaksController {
 	@RequestMapping(value="/{userId}/{projectId}", method=RequestMethod.POST)
 	public Task createTask(@RequestBody Task task, @PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId) {
 		Task retVal = taskRepository.save(task);
-		taskAssignmentRepository.save(new TaskAssignment(retVal.getTaskId(), projectId, userId));
+		taskAssignmentRepository.save(new TaskAssignment(retVal.getTaskId(), userId));
 		return retVal;
 	}
 	
