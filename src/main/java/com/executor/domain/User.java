@@ -15,7 +15,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="userId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="userId", columnDefinition="BIGINT")
 	private Long userId;
 	@Column(name="username", columnDefinition="VARCHAR(30) NOT NULL UNIQUE")
 	private String username;

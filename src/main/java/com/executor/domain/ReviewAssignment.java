@@ -15,15 +15,15 @@ public class ReviewAssignment {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="reviewAssignmentId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="reviewAssignmentId", columnDefinition="BIGINT")
 	private Long reviewAssignmentId;
-	@Column(name="reviewId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="reviewId", columnDefinition="BIGINT NOT NULL")
 	private Long reviewId;
-	@Column(name="userId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="userId", columnDefinition="BIGINT NOT NULL")
 	private Long userId;
-	@Column(name="reviewerId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="reviewerId", columnDefinition="BIGINT NOT NULL")
 	private Long reviewerId;
-	@Column(name="projectId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="projectId", columnDefinition="BIGINT NOT NULL")
 	private Long projectId;
 	
 	public ReviewAssignment() {		

@@ -17,7 +17,7 @@ public class Review {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="reviewId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="reviewId", columnDefinition="BIGINT")
 	private Long reviewId;
 	@Column(name="title", columnDefinition="VARCHAR(30) NOT NULL")
 	private String title;

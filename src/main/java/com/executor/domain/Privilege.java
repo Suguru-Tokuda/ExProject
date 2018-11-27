@@ -15,7 +15,7 @@ public class Privilege {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="privilegeId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="privilegeId", columnDefinition="BIGINT")
 	private Long privilegeId;
 	@Column(name="privilegeName", columnDefinition="VARCHAR(30)")
 	private String privilegeName;

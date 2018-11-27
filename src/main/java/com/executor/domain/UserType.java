@@ -16,11 +16,11 @@ public class UserType {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="userTypeId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="userTypeId", columnDefinition="BIGINT")
 	private Long userTypeId;
-	@Column(name="userId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="userId", columnDefinition="BIGINT NOT NULL")
 	private Long userId;
-	@Column(name="userTypeOptionId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="userTypeOptionId", columnDefinition="BIGINT NOT NULL")
 	private Long userTypeOptionId;
 	
 	public UserType() {

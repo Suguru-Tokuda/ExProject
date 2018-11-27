@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,7 +19,7 @@ public class Task {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="taskId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="taskId", columnDefinition="BIGINT")
 	private Long taskId;
 	@Column(name="taskName", columnDefinition="VARCHAR(30) NOT NULL")
 	private String taskName;
@@ -29,9 +31,11 @@ public class Task {
 	private boolean completed;
 	@Column(name="approved", columnDefinition="TINYINT(1) NOT NULL DEFAULT 0")
 	private boolean approved;
+	@ManyToOne
+	@JoinColumn(name="projectId", nullable=false, columnDefinition="BIGINT")
+	private Project project;
 	
-	public Task() {
-	}
+	public Task() {}
 	
 	public Task(Long taskId, String taskName, Date startDate, Date endDate, boolean completed, boolean approved) {
 		super();
@@ -43,6 +47,17 @@ public class Task {
 		this.approved = approved;
 	}
 	
+	public Task(Long taskId, String taskName, Date startDate, Date endDate, boolean completed, boolean approved, Project project) {
+		super();
+		this.taskId = taskId;
+		this.taskName = taskName;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.completed = completed;
+		this.approved = approved;
+		this.project = project;
+	}
+
 	public Long getTaskId() {
 		return taskId;
 	}
@@ -89,6 +104,14 @@ public class Task {
 	
 	public void setApproved(boolean approved) {
 		this.approved = approved;
-	}	
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 	
 }

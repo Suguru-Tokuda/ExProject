@@ -1,12 +1,15 @@
 package com.executor.domain;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,7 +20,7 @@ public class Project {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="projectId",columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="projectId",columnDefinition="BIGINT AUTO_INCREMENT")
 	private Long projectId;
 	@Column(name="projectName", columnDefinition="VARCHAR(30) NOT NULL")
 	private String projectName;
@@ -29,6 +32,8 @@ public class Project {
 	private boolean completed;
 	@Column(name="picture", nullable=true, columnDefinition="BLOB")
 	private String picture;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="project")
+	private List<Task> tasks;
 	
 	public Project() {
 	}
@@ -104,6 +109,14 @@ public class Project {
 	
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+	
+	public List<Task> getTasks() {
+		return tasks;
+	}
+	
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 }

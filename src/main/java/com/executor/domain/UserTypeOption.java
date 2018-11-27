@@ -16,9 +16,9 @@ public class UserTypeOption {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="userTypeOptionId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="userTypeOptionId", columnDefinition="BIGINT")
 	private Long userTypeOptionId;
-	@Column(name="projectId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="projectId", columnDefinition="BIGINT NOT NULL")
 	private Long projectId;
 	@Column(name="userType", columnDefinition="VARCHAR(30)")
 	private String userType;

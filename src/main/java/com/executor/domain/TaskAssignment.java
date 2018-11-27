@@ -15,28 +15,24 @@ public class TaskAssignment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="taskAssignmentId", columnDefinition="MEDIUMINT AUTO_INCREMENT")
+	@Column(name="taskAssignmentId", columnDefinition="BIGINT AUTO_INCREMENT")
 	private Long taskAssignmentId;
-	@Column(name="taskId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="taskId", columnDefinition="BIGINT NOT NULL")
 	private Long taskId;
-	@Column(name="projectId", columnDefinition="MEDIUMINT NOT NULL")
-	private Long projectId;
-	@Column(name="userId", columnDefinition="MEDIUMINT NOT NULL")
+	@Column(name="userId", columnDefinition="BIGINT NOT NULL")
 	private Long userId;
 	
 	public TaskAssignment() {		
 	}	
 	
-	public TaskAssignment(Long taskAssignmentId, Long taskId, Long projectId, Long userId) {
+	public TaskAssignment(Long taskAssignmentId, Long taskId, Long userId) {
 		this.taskAssignmentId = taskAssignmentId;
 		this.taskId = taskId;
-		this.projectId = projectId;
 		this.userId = userId;
 	}
 	
-	public TaskAssignment(Long taskId, Long projectId, Long userId) {
+	public TaskAssignment(Long taskId, Long userId) {
 		this.taskId = taskId;
-		this.projectId = projectId;
 		this.userId = userId;
 	}
 
@@ -54,14 +50,6 @@ public class TaskAssignment {
 	
 	public void setTaskId(Long taskId) {
 		this.taskId = taskId;
-	}
-	
-	public Long getProjectId() {
-		return projectId;
-	}
-	
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
 	}
 	
 	public Long getUserId() {
