@@ -36,7 +36,7 @@ public class Task {
 	@JoinColumn(name="projectId", nullable=false, columnDefinition="BIGINT")
 	private Project project;
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="userId", nullable=false, columnDefinition="BIGINT")
+	@JoinColumn(name="userId", nullable=true, columnDefinition="BIGINT")
 	private User user;
 	
 	public Task() {}

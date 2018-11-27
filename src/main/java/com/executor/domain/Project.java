@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,7 +21,7 @@ public class Project {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="projectId",columnDefinition="BIGINT AUTO_INCREMENT")
+	@Column(name="projectId",columnDefinition="BIGINT")
 	private Long projectId;
 	@Column(name="projectName", columnDefinition="VARCHAR(30) NOT NULL")
 	private String projectName;
@@ -34,6 +35,10 @@ public class Project {
 	private String picture;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="project")
 	private List<Task> tasks;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="project")
+	private List<UserTypeOption> userTypeOptions;
+	@ManyToMany(cascade=CascadeType.ALL, mappedBy="projects")
+	private List<User> users;
 	
 	public Project() {
 	}
@@ -117,6 +122,22 @@ public class Project {
 	
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public List<UserTypeOption> getUserTypeOptions() {
+		return userTypeOptions;
+	}
+
+	public void setUserTypeOptions(List<UserTypeOption> userTypeOptions) {
+		this.userTypeOptions = userTypeOptions;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

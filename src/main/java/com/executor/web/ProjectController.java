@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.executor.domain.Project;
-import com.executor.domain.ProjectAssignment;
-import com.executor.domain.ProjectAssignmentRepository;
 import com.executor.domain.ProjectRepository;
 import com.executor.domain.TaskRepository;
 
@@ -24,8 +22,6 @@ public class ProjectController {
 	
 	@Autowired
 	ProjectRepository projectRepository;
-	@Autowired
-	ProjectAssignmentRepository projectAssignmentRepository;
 	@Autowired
 	TaskRepository taskRepository;
 	
@@ -46,8 +42,6 @@ public class ProjectController {
 	@RequestMapping(value="/{userId}", method=RequestMethod.POST)
 	public Project createProject(@RequestBody Project project, @PathVariable Long userId) {
 		Project retVal = projectRepository.save(project);
-		// Create an object of ProjectAssignment with the given projectId.
-		projectAssignmentRepository.save(new ProjectAssignment(retVal.getProjectId(), userId));
 		// Return the Project instance. 
 		return retVal;
 	}

@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,6 +46,14 @@ public class User {
 	private String role;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
 	private List<Task> tasks;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="UserProjectAssignments", joinColumns = {
+	@JoinColumn(name="userId", nullable=false, updatable=false)}, inverseJoinColumns = { @JoinColumn(name="projectId", nullable=false, updatable=false)})
+	private List<Project> projects;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="UserOptionAssignments", joinColumns = {
+	@JoinColumn(name="userId", nullable=false, updatable=false)}, inverseJoinColumns = { @JoinColumn(name="userTypeOptionId", nullable=false, updatable=false)})
+	private List<UserTypeOption> userTypeOptions;
 	
 	public User() {
     }
@@ -193,6 +204,22 @@ public class User {
 	
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public List<UserTypeOption> getUserTypeOptions() {
+		return userTypeOptions;
+	}
+
+	public void setUserTypeOptions(List<UserTypeOption> userTypeOptions) {
+		this.userTypeOptions = userTypeOptions;
 	}
 
 	public List<Task> getTasks() {
