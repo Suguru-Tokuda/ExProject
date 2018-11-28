@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.executor.domain.Project;
 import com.executor.domain.ProjectRepository;
 import com.executor.domain.TaskRepository;
+import com.executor.domain.User;
+import com.executor.domain.UserRepository;
 
 @RestController
 @RequestMapping("/projects")
@@ -24,6 +26,8 @@ public class ProjectController {
 	ProjectRepository projectRepository;
 	@Autowired
 	TaskRepository taskRepository;
+	@Autowired
+	UserRepository userRepository;
 	
 	@RequestMapping(value="")
 	public Iterable<Project> getProjects(@RequestParam(value="userId", required=false) Long userId) {
@@ -41,9 +45,15 @@ public class ProjectController {
 	
 	@RequestMapping(value="/{userId}", method=RequestMethod.POST)
 	public Project createProject(@RequestBody Project project, @PathVariable Long userId) {
-		Project retVal = projectRepository.save(project);
-		// Return the Project instance. 
-		return retVal;
+		User user = userRepository.findById(userId).orElse(null);
+		if (user != null) {
+			user.getProjects().add(project);
+			userRepository.save(user);
+			// Return the project that was just inserted
+			return user.getProjects().get(user.getProjects().size() - 1);
+		}
+		// Return null if it fails. 
+		return null;
 	}
 	
 	@RequestMapping(value="/{projectId}", method=RequestMethod.DELETE)

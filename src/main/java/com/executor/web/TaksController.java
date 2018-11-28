@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.executor.domain.ProjectRepository;
 import com.executor.domain.Task;
 import com.executor.domain.TaskRepository;
 
@@ -56,14 +57,13 @@ public class TaksController {
 	}
 	
 	@RequestMapping(value="/{taskId}", method=RequestMethod.GET)
-	public Optional<Task> getTask(@PathVariable("taskId") Long taskId) {
-		return taskRepository.findById(taskId);
+	public Optional<Task> getTask(@PathVariable("taskId") String taskId) {
+		return taskRepository.findById(Long.parseLong(taskId));
 	}
 	
-	@RequestMapping(value="/{userId}/{projectId}", method=RequestMethod.POST)
-	public Task createTask(@RequestBody Task task, @PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId) {
-		Task retVal = taskRepository.save(task);
-		return retVal;
+	@RequestMapping(value="", method=RequestMethod.POST)
+	public Task createTask(@RequestBody Task task) {
+		return taskRepository.save(task);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.PATCH)
