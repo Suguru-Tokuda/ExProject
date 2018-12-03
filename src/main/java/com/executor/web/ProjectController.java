@@ -84,15 +84,14 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/authority/{projectId}/{userId}", method=RequestMethod.DELETE)
-	public boolean unassignAuthority(@RequestBody Long projectId, @RequestBody Long userId) {
+	public void unassignAuthority(@RequestBody Long projectId, @RequestBody Long userId) {
 		Authority authority = authorityRepository.findByProjectId(projectId).orElse(null);
 		if (authority != null) {
 			User user = userRepository.findById(userId).orElse(null);
 			if (user != null) {
-				return authority.getUsers().remove(user);
+				authority.getUsers().remove(user);
 			}
 		}
-		return false;
 	}
 
 }
