@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,19 +45,18 @@ public class User {
 	private boolean archived;
 	@Column(name="role", nullable=false, columnDefinition="VARCHAR(10) DEFAULT 'User'")
 	private String role;
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
-	private List<Task> tasks;
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="UserProjectAssignments", joinColumns = {
 	@JoinColumn(name="userId", nullable=false, updatable=false)}, inverseJoinColumns = { @JoinColumn(name="projectId", nullable=false, updatable=false)})
 	private List<Project> projects;
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="UserOptionAssignments", joinColumns = {
-	@JoinColumn(name="userId", nullable=false, updatable=false)}, inverseJoinColumns = { @JoinColumn(name="userTypeOptionId", nullable=false, updatable=false)})
-	private List<UserTypeOption> userTypeOptions;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	private List<Task> tasks;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="UserAuthorityAssignments", joinColumns = {
+	@JoinColumn(name="userId", nullable=false, updatable=false)}, inverseJoinColumns = { @JoinColumn(name="authorityId", nullable=false, updatable=false)})
+	private List<Authority> authorities;
 	
-	public User() {
-    }
+	public User() {}
 
     public User(Long userId) {
         this.userId = userId;
@@ -214,20 +214,20 @@ public class User {
 		this.projects = projects;
 	}
 
-	public List<UserTypeOption> getUserTypeOptions() {
-		return userTypeOptions;
-	}
-
-	public void setUserTypeOptions(List<UserTypeOption> userTypeOptions) {
-		this.userTypeOptions = userTypeOptions;
-	}
-
 	public List<Task> getTasks() {
 		return tasks;
 	}
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public List<Authority> getUserAuthorities() {
+		return authorities;
+	}
+
+	public void setUserAuthorities(List<Authority> userAuthorities) {
+		this.authorities = userAuthorities;
 	}
 
 }

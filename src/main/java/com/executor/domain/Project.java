@@ -36,12 +36,11 @@ public class Project {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="project")
 	private List<Task> tasks;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="project")
-	private List<UserTypeOption> userTypeOptions;
-	@ManyToMany(cascade=CascadeType.ALL, mappedBy="projects")
+	private List<Authority> authorities;
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List<User> users;
 	
-	public Project() {
-	}
+	public Project() {}
 	
 	public Project(Long projectId, String projectName, Date startDate, Date endDate, boolean completed,
 			String picture) {
@@ -124,12 +123,12 @@ public class Project {
 		this.tasks = tasks;
 	}
 
-	public List<UserTypeOption> getUserTypeOptions() {
-		return userTypeOptions;
+	public List<Authority> getUserOptions() {
+		return authorities;
 	}
 
-	public void setUserTypeOptions(List<UserTypeOption> userTypeOptions) {
-		this.userTypeOptions = userTypeOptions;
+	public void setUserTypeOptions(List<Authority> authorities) {
+		this.authorities = authorities	;
 	}
 
 	public List<User> getUsers() {
@@ -138,6 +137,14 @@ public class Project {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
 	}
 
 }

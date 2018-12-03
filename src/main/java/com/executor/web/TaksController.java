@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.executor.domain.ProjectRepository;
 import com.executor.domain.Task;
 import com.executor.domain.TaskRepository;
 
@@ -72,10 +71,9 @@ public class TaksController {
 	}
 	
 	@RequestMapping(value="/setUser", method=RequestMethod.POST)
-	public Task setUser(@RequestParam(value="userId", required=true) String userId, @RequestParam(value="taskId", required=true) String taskId) {
-		return taskRepository.setUserId(Long.parseLong(userId), Long.parseLong(taskId));
-	}
-			
+	public Task setUser(@RequestParam(value="userId", required=true) Long userId, @RequestParam(value="taskId", required=true) Long taskId) {
+		return taskRepository.setUserId(userId, taskId);
+	}			
 	
 	@RequestMapping(value="/{taskId}", method=RequestMethod.DELETE)
 	public void deleteTask(@PathVariable("taskId") Long taskId) {

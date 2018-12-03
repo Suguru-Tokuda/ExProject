@@ -87,29 +87,24 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/updateEmail", method=RequestMethod.PUT)
-	public void updateEmail(@RequestParam(value="oldEmail", required=true) String oldEmail, @RequestParam(value="newEmail", required=true) String newEmail) {
+	public void updateEmail(@RequestBody String oldEmail, @RequestBody String newEmail) {
 		// Check if the old email exists.
 		if (userRepository.findByEmail(oldEmail) != null)
 			userRepository.updateEmail(newEmail, oldEmail);
 	}
 	
 	@RequestMapping(value="/confirm", method=RequestMethod.POST)
-	public void confirmUser(@RequestParam(value="userId", required=true) String userId) {
+	public void confirmUser(@RequestBody Long userId) {
 		// If there is a record for the email, it confirms for the email
-		if (userRepository.findById(Long.parseLong(userId)) != null)
-			userRepository.confirm(Long.parseLong(userId));
+		if (userRepository.findById(userId) != null)
+			userRepository.confirm(userId);
 	}
 	
 	@RequestMapping(value="/archive", method=RequestMethod.POST)
-	public void archiveUser(@RequestParam(value="userId", required=true) String userId, @RequestParam(value="email", required=true) String email) {
+	public void archiveUser(@RequestBody Long userId, @RequestBody String email) {
 		// If there is a record for the email, it archives for the email
 		if (userRepository.findByEmail(email) != null)
-			userRepository.archive(Long.parseLong(userId));
-	}
-	
-	@RequestMapping(value="/findByEmail", method=RequestMethod.POST)
-	public User getByEmail(@RequestParam(value="email", required=true) String email) {
-		return userRepository.findByEmail(email);
+			userRepository.archive(userId);
 	}
 	
 }

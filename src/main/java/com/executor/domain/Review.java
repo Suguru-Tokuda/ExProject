@@ -26,8 +26,7 @@ public class Review {
 	@Column(name="postDate", columnDefinition="DATE NOT NULL")
 	private Date postDate;
 	
-	public Review() {
-	}
+	public Review() {}
 	
 	public Review(Long reviewId, String title, String reviewDescription, Date postDate) {
 		super();

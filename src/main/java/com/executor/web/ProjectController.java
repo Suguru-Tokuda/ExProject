@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.executor.domain.Authority;
+import com.executor.domain.AuthorityRepository;
 import com.executor.domain.Project;
 import com.executor.domain.ProjectRepository;
 import com.executor.domain.TaskRepository;
@@ -28,6 +30,8 @@ public class ProjectController {
 	TaskRepository taskRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	AuthorityRepository authorityRepository;
 	
 	@RequestMapping(value="")
 	public Iterable<Project> getProjects(@RequestParam(value="userId", required=false) Long userId) {
@@ -64,6 +68,31 @@ public class ProjectController {
 	@RequestMapping(method=RequestMethod.PATCH)
 	public Project updateProject(@RequestBody Project project) {
 		return projectRepository.save(project);
+	}
+	
+	@RequestMapping(value="/authority", method=RequestMethod.POST)
+	public Authority assignAuthority(@RequestBody Long projectId, @RequestBody Long userId) {
+		Authority authority = authorityRepository.findByProjectId(projectId).orElse(null);
+		if (authority != null) {
+			User user = userRepository.findById(userId).orElse(null);
+			if (user != null) {
+				authority.getUsers().add(user);
+				return authority;
+			}
+		}
+		return null;
+	}
+	
+	@RequestMapping(value="/authority/{projectId}/{userId}", method=RequestMethod.DELETE)
+	public boolean unassignAuthority(@RequestBody Long projectId, @RequestBody Long userId) {
+		Authority authority = authorityRepository.findByProjectId(projectId).orElse(null);
+		if (authority != null) {
+			User user = userRepository.findById(userId).orElse(null);
+			if (user != null) {
+				return authority.getUsers().remove(user);
+			}
+		}
+		return false;
 	}
 
 }

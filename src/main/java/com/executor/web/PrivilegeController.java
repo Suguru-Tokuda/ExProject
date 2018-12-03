@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.executor.domain.Privilege;
@@ -19,7 +18,7 @@ public class PrivilegeController {
 	PrivilegeRepository previlegeRepository;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
-	public Iterable<Privilege> getPrivileges(@RequestParam(value="userTypeOptionId", required=true) Long userTypeOptionId) {
+	public Iterable<Privilege> getPrivileges() {
 		return previlegeRepository.findAll();
 	}
 	

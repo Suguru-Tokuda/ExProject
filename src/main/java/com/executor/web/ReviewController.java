@@ -72,8 +72,8 @@ public class ReviewController {
 	}
 	
 	
-	@RequestMapping(value="/{userId}/{reviewerId}/{projectId}", method=RequestMethod.POST)
-	public Review createReview(@RequestBody Review review, @PathVariable("userId") Long userId, @PathVariable("reviewerId") Long reviewerId, @PathVariable("projectId") Long projectId) {
+	@RequestMapping(value="", method=RequestMethod.POST)
+	public Review createReview(@RequestBody Review review, @RequestParam(value="userId", required=true) Long userId, @RequestParam(value="reviewerId", required=true) Long reviewerId, @RequestParam(value="projectId", required=true) Long projectId) {
 		Review retVal = reviewRepository.save(review);
 		reviewAssignmentRepository.save(new ReviewAssignment(retVal.getReviewId(), userId, reviewerId, projectId));
 		return retVal;

@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="Privileges")
 @XmlRootElement
+/* Holds static string values */
 public class Privilege {
 	
 	@Id
@@ -20,8 +21,7 @@ public class Privilege {
 	@Column(name="privilegeName", columnDefinition="VARCHAR(30)")
 	private String privilegeName;
 	
-	public Privilege() {
-	}
+	public Privilege() {}
 	
 	public Privilege(Long privilegeId, String privilegeName, Long userTypeOptionId) {
 		this.privilegeId = privilegeId;

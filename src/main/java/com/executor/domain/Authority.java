@@ -15,53 +15,52 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="UserTypeOptions")
+@Table(name="Authorities")
 @XmlRootElement
 /* This class holds which privilege users have for a particular project  */
-public class UserTypeOption {
+public class Authority {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="userTypeOptionId", columnDefinition="BIGINT")
-	private Long userTypeOptionId;
-	@Column(name="userType", columnDefinition="VARCHAR(30)")
-	private String userType;
+	@Column(name="authorityId", columnDefinition="BIGINT")
+	private Long authorityId;
+	@Column(name="authorityName", columnDefinition="VARCHAR(30)")
+	private String authorityName;
 	@Column(name="privilegeStr", columnDefinition="VARCHAR(255)")
 	private String privilegeStr;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="projectId", nullable=false, columnDefinition="BIGINT")
 	private Project project;
-	@ManyToMany(fetch=FetchType.LAZY, mappedBy="userTypeOptions")
+	@ManyToMany(fetch=FetchType.LAZY)
 	private List<User> users;
 	
-	public UserTypeOption() {	
-	}
+	public Authority() {}
 	
-	public UserTypeOption(Long userTypeOptionId, String userType, String privilegeStr) {
-		this.userTypeOptionId = userTypeOptionId;
-		this.userType = userType;
+	public Authority(Long authorityId, String userType, String privilegeStr) {
+		this.authorityId = authorityId;
+		this.authorityName = userType;
 		this.privilegeStr = privilegeStr;
 	}
 	
-	public UserTypeOption(String userType, String privilegeStr) {
-		this.userType = userType;
+	public Authority(String userType, String privilegeStr) {
+		this.authorityName = userType;
 		this.privilegeStr = privilegeStr;
 	}	
 	
-	public Long getUserTypeOptionId() {
-		return userTypeOptionId;
+	public Long getAuthorityId() {
+		return authorityId;
 	}
 	
-	public void setUserTypeOptionId(Long userTypeOptionId) {
-		this.userTypeOptionId = userTypeOptionId;
+	public void setAuthorityId(Long authorityId) {
+		this.authorityId = authorityId;
 	}
 	
-	public String getUserType() {
-		return userType;
+	public String getAuthorityName() {
+		return authorityName;
 	}
 	
-	public void setUserType(String userType) {
-		this.userType = userType;
+	public void setAuthorityName(String authorityName) {
+		this.authorityName = authorityName;
 	}
 	
 	public String getPrivilegeStr() {

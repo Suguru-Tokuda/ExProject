@@ -26,8 +26,7 @@ public class ReviewAssignment {
 	@Column(name="projectId", columnDefinition="BIGINT NOT NULL")
 	private Long projectId;
 	
-	public ReviewAssignment() {		
-	}
+	public ReviewAssignment() {}
 	
 	public ReviewAssignment(Long reviewId, Long userId, Long reviewerId, Long projectId) {
 		super();
